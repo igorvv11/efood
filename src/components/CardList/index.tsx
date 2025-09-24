@@ -1,29 +1,27 @@
-import Card from "../Card";
-import { CardLi, CardlistContainer } from "./styles";
+import Dish from "../../models/Dish";
 
-const CardList = () => (
-  <div className="container">
-    <CardlistContainer>
-      <CardLi>
-        <Card />
-      </CardLi>
-      <CardLi>
-        <Card />
-      </CardLi>
-      <CardLi>
-        <Card />
-      </CardLi>
-      <CardLi>
-        <Card />
-      </CardLi>
-      <CardLi>
-        <Card />
-      </CardLi>
-      <CardLi>
-        <Card />
-      </CardLi>
-    </CardlistContainer>
-  </div>
+import Card from "../Card";
+import { CardLi, Cardlist } from "./styles";
+
+type Props = {
+  dish: Dish[];
+};
+
+const CardList = ({ dish }: Props) => (
+  <Cardlist>
+    <CardLi>
+      {dish.map((dish) => (
+        <Card
+          key={dish.id}
+          title={dish.title}
+          infos={dish.infos}
+          image={dish.image}
+          description={dish.description}
+          avaliation={dish.avaliation}
+        />
+      ))}
+    </CardLi>
+  </Cardlist>
 );
 
 export default CardList;

@@ -1,18 +1,26 @@
 import styled from "styled-components";
+import { cores } from "../../styles";
 
 export const HeroHeader = styled.header`
   width: 100%;
+  padding-bottom: 65px;
 
   .container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    padding-top: 64px;
     align-items: center;
     img {
-      margin-top: 64px;
+      justify-self: center;
+    }
+    a:last-child {
+      justify-self: end;
     }
   }
 `;
-
-// background-color: ${cores.laranja};
-// background-repeat: no-repeat;
-// background-size: cover;
+export const Nav = styled.a`
+  color: ${cores.vermelho};
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+`;

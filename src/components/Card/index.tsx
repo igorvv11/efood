@@ -1,25 +1,46 @@
-import Sushi from "../../assets/images/sushi.png";
 import Estrela from "../../assets/images/estrela.png";
 
-import { Border, Botao, CardContainer, Description, TitleCard } from "./styles";
+import {
+  Border,
+  Botao,
+  CardContainer,
+  Description,
+  Infos,
+  TitleCard,
+} from "./styles";
+import Tag from "../Tag";
+import { Link } from "react-router-dom";
 
-const Card = () => (
+type Props = {
+  title: string;
+  infos: string[];
+  image: string;
+  description: string;
+  avaliation: number;
+};
+
+const Card = ({ title, infos, image, description, avaliation }: Props) => (
   <CardContainer>
     <Border>
-      <img src={Sushi} alt="Sushi dish" />
+      <img src={image} alt={title} />
+      <Infos>
+        {infos.map((info) => (
+          <Tag key={info}>{info}</Tag>
+        ))}
+      </Infos>
+
       <TitleCard>
-        <h4>Hioki Sushi</h4>
+        <h4>{title}</h4>
         <h4>
-          4.9 <img src={Estrela} alt="Estrela" />
+          {avaliation}
+          <img src={Estrela} alt="Estrela" />
         </h4>
       </TitleCard>
-      <Description>
-        Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis
-        frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega
-        rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão
-        sem sair do lar com nosso delivery!
-      </Description>
-      <Botao>Saiba mais</Botao>
+      <Description>{description}</Description>
+      <Link to="/Perfil">
+        {" "}
+        <Botao>Saiba mais</Botao>{" "}
+      </Link>
     </Border>
   </CardContainer>
 );

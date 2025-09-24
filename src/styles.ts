@@ -1,10 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const cores = {
   branca: "#FFF8F2",
   vermelho: "#E66767",
   laranja: "#FFEBD9",
-  verde: "#10AC84",
 };
 
 export const GlobalCss = createGlobalStyle`
@@ -26,4 +25,10 @@ body{
   margin: 0 auto;
 }
 
+`;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 80px;
 `;

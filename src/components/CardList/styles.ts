@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const CardlistContainer = styled.ul`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 80px;
-  row-gap: 80px;
+export const Cardlist = styled.ul`
   list-style: none;
 `;
 
 export const CardLi = styled.li`
+  margin-bottom: 80px;
   padding-bottom: 80px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 160px;
 `;
