@@ -1,20 +1,23 @@
+// HeroPage.tsx
 import Macarao from "../../assets/images/macarrao_hero.png";
-import { HeroBackground, HeroPageContainer, Info, Title } from "./styles";
+import {
+  HeroBackground,
+  HeroPageContainer,
+  Info,
+  Title,
+  Content,
+  Wrapper,
+} from "./styles";
 
 const HeroPage = () => (
-  <HeroPageContainer className="container">
-    <HeroBackground
-      style={{
-        background: `url(${Macarao}) `,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        filter: "brightness(50%)",
-      }}
-    ></HeroBackground>
-    <div>
-      <Info>Italiana</Info>
-      <Title>La Dolce Vita Trattoria</Title>
-    </div>
+  <HeroPageContainer>
+    <HeroBackground style={{ backgroundImage: `url(${Macarao})` }} />
+    <Wrapper>
+      <Content>
+        <Info>Italiana</Info>
+        <Title>La Dolce Vita Trattoria</Title>
+      </Content>
+    </Wrapper>
   </HeroPageContainer>
 );
 

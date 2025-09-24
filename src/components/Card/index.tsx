@@ -13,13 +13,13 @@ import { Link } from "react-router-dom";
 
 type Props = {
   title: string;
-  infos: string[];
+  infos?: string[];
   image: string;
   description: string;
   avaliation: number;
 };
 
-const Card = ({ title, infos, image, description, avaliation }: Props) => (
+const Card = ({ title, infos = [], image, description, avaliation }: Props) => (
   <CardContainer>
     <Border>
       <img src={image} alt={title} />
