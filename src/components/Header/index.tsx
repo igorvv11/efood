@@ -1,23 +1,43 @@
-import Logo from "../../assets/images/logo.png";
-import { HeroHeader, Nav } from "./styles";
+import {
+  HeaderHome,
+  HeaderPerfil,
+  HeroHeader,
+  Nav,
+  StyledLink,
+  TitleHeader,
+} from "./styles";
 import Vector from "../../assets/images/Vector.png";
-import { Link } from "react-router-dom";
+import Logo from "../../assets/images/logo.png";
 
-type Props = {
-  carrinho?: string;
-  bars?: string;
+export type HeaderProps = {
+  variant?: "home" | "perfil";
 };
 
-const Header = ({ carrinho, bars }: Props) => {
+const Header = ({ variant = "home" }: HeaderProps) => {
+  if (variant === "perfil") {
+    return (
+      <HeroHeader style={{ background: `url(${Vector}) ` }}>
+        <HeaderPerfil className="container">
+          <Nav href="#">Restaurantes</Nav>
+          <StyledLink to="/">
+            <img src={Logo} alt="Company logo" />
+          </StyledLink>
+          <Nav href="#">0 produto(s) no carrinho</Nav>
+        </HeaderPerfil>
+      </HeroHeader>
+    );
+  }
+
   return (
     <HeroHeader style={{ background: `url(${Vector}) ` }}>
-      <div className="container">
-        <Nav href="#">{bars}</Nav>
-        <Link to="/">
+      <HeaderHome className="container">
+        <StyledLink to="/">
           <img src={Logo} alt="Company logo" />
-        </Link>
-        <Nav href="#">{carrinho}</Nav>
-      </div>
+        </StyledLink>
+        <TitleHeader>
+          Viva experiências gastronômicas no conforto da sua casa
+        </TitleHeader>
+      </HeaderHome>
     </HeroHeader>
   );
 };

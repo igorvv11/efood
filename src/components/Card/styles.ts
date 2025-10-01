@@ -1,38 +1,60 @@
 import styled from "styled-components";
 import { cores } from "../../styles";
 
-export const CardContainer = styled.div`
-  width: 472px;
-  height: 181px;
-  margin-bottom: 80px;
+type Props = {
+  variant?: "card" | "product";
+};
+
+export const CardContainer = styled.div<Props>`
+  background-color: ${(props) =>
+    props.variant === "product" ? cores.vermelho : cores.branca};
+  color: ${(props) => (props.variant === "product" ? cores.branca : "inherit")};
+  padding: ${(props) => (props.variant === "product" ? "8px" : "0")};
   position: relative;
+  width: ${(props) => (props.variant === "product" ? "320px" : "472px")};
+
+  > img {
+    width: 100%;
+    height: ${(props) => (props.variant === "product" ? "167px" : "217px")};
+    object-fit: cover;
+  }
 `;
 
 export const Border = styled.div`
   border: 1px solid ${cores.vermelho};
+  height: 100%;
 `;
 
-export const Description = styled.p`
+export const Description = styled.p<Props>`
   font-size: 14px;
-  margin: 16px 8px;
+  line-height: 22px;
+  margin: ${(props) => (props.variant === "product" ? "8px 0" : "16px 8px")};
 `;
 
-export const TitleCard = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 8px;
+export const TitleCard = styled.div<Props>`
+  margin: ${(props) => (props.variant === "product" ? "8px 0 0 0" : "8px")};
+  font-weight: bold;
+  font-size: ${(props) => (props.variant === "product" ? "16px" : "18px")};
 `;
 
-export const Botao = styled.a`
-  display: inline-block;
-  padding: 4px 6px;
-  background-color: ${cores.vermelho};
-  color: ${cores.branca};
+export const Botao = styled.a<Props>`
+  background-color: ${(props) =>
+    props.variant === "product" ? cores.branca : cores.vermelho};
+  color: ${(props) =>
+    props.variant === "product" ? cores.vermelho : cores.branca};
+  padding: ${(props) => (props.variant === "product" ? "4px" : "4px 6px")};
   border: none;
-  margin-bottom: 8px;
-  margin-left: 8px;
   text-decoration: none;
   cursor: pointer;
+  display: ${(props) =>
+    props.variant === "product" ? "block" : "inline-block"};
+  width: ${(props) => (props.variant === "product" ? "100%" : "auto")};
+  text-align: ${(props) => (props.variant === "product" ? "center" : "left")};
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: ${(props) => (props.variant === "product" ? "8px" : "0")};
+  margin-left: ${(props) => (props.variant === "product" ? "0" : "8px")};
+  margin-bottom: ${(props) => (props.variant === "product" ? "0" : "8px")};
 `;
 
 export const Infos = styled.div`
@@ -40,4 +62,16 @@ export const Infos = styled.div`
   position: absolute;
   top: 16px;
   right: 16px;
+  gap: 8px;
+`;
+
+export const TitleDescription = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 `;

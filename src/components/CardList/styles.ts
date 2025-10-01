@@ -1,13 +1,19 @@
 import styled from "styled-components";
 
-export const Cardlist = styled.ul`
+type Props = {
+  variant: "home" | "perfil";
+};
+
+export const List = styled.ul<Props>`
   list-style: none;
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.variant === "home" ? "1fr 1fr" : "1fr 1fr 1fr"};
+  column-gap: ${(props) => (props.variant === "home" ? "80px" : "32px")};
+  row-gap: ${(props) => (props.variant === "home" ? "40px" : "32px")};
+  margin-top: ${(props) => (props.variant === "home" ? "80px" : "56px")};
 `;
 
 export const CardLi = styled.li`
-  margin-bottom: 80px;
-  padding-bottom: 80px;
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 160px;
+  /* Estilos individuais do item da lista, se necessário no futuro */
 `;
