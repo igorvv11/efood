@@ -1,19 +1,20 @@
 import styled from "styled-components";
+import { cores } from "../../styles";
 
-type Props = {
-  variant: "home" | "perfil";
-};
-
-export const List = styled.ul<Props>`
-  list-style: none;
-  display: grid;
-  grid-template-columns: ${(props) =>
-    props.variant === "home" ? "1fr 1fr" : "1fr 1fr 1fr"};
-  column-gap: ${(props) => (props.variant === "home" ? "80px" : "32px")};
-  row-gap: ${(props) => (props.variant === "home" ? "40px" : "32px")};
-  margin-top: ${(props) => (props.variant === "home" ? "80px" : "56px")};
+export const Container = styled.section`
+  padding: 80px 0 120px 0;
 `;
 
-export const CardLi = styled.li`
-  /* Estilos individuais do item da lista, se necessário no futuro */
+export const List = styled.ul`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 80px;
+  row-gap: 40px;
+  margin-top: 80px;
+`;
+
+export const Title = styled.h2`
+  font-size: 18px;
+  font-weight: bold;
+  color: ${cores.branca};
 `;

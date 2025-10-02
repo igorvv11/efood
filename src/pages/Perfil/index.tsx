@@ -1,72 +1,62 @@
 import Header from "../../components/Header";
 import HeroPage from "../../components/HeroPage";
-import CardList from "../../components/CardList";
-import Dish from "../../models/Dish";
-import Pizza from "../../assets/images/pizza.png";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import DishesList from "../../components/DishesList";
+import { Restaurant } from "../Home";
+import Modal from "../../components/Modal";
 
-const pratos: Dish[] = [
-  {
-    id: 7,
-    title: "Pizza Marguerita",
-    description:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    image: Pizza,
-    infos: [],
-    avaliation: 5,
-  },
-  {
-    id: 7,
-    title: "Pizza Marguerita",
-    description:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    image: Pizza,
-    infos: [],
-    avaliation: 5,
-  },
-  {
-    id: 7,
-    title: "Pizza Marguerita",
-    description:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    image: Pizza,
-    infos: [],
-    avaliation: 5,
-  },
-  {
-    id: 7,
-    title: "Pizza Marguerita",
-    description:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    image: Pizza,
-    infos: [],
-    avaliation: 5,
-  },
-  {
-    id: 7,
-    title: "Pizza Marguerita",
-    description:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    image: Pizza,
-    infos: [],
-    avaliation: 5,
-  },
-  {
-    id: 7,
-    title: "Pizza Marguerita",
-    description:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    image: Pizza,
-    infos: [],
-    avaliation: 5,
-  },
-];
+export type Dish = {
+  id: number;
+  foto: string;
+  preco: number;
+  nome: string;
+  descricao: string;
+  porcao: string;
+};
 
-const Perfil = () => (
-  <>
-    <Header variant="perfil" />
-    <HeroPage />
-    <CardList variant="perfil" dishes={pratos} />
-  </>
-);
+export type GalleryItem = Dish;
+
+const Perfil = () => {
+  const { id } = useParams();
+
+  const [restaurant, setRestaurant] = useState<Restaurant>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
+
+  useEffect(() => {
+    fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes/${id}`)
+      .then((response) => response.json())
+      .then((data) => setRestaurant(data));
+  }, [id]);
+
+  if (!restaurant) {
+    return <h3>Carregando...</h3>;
+  }
+
+  const openModal = (dish: Dish) => {
+    setSelectedDish(dish);
+    setIsModalOpen(true);
+  };
+
+  return (
+    <>
+      <Header variant="perfil" />
+      <HeroPage
+        image={restaurant.capa}
+        category={restaurant.tipo}
+        title={restaurant.titulo}
+      />
+      {selectedDish && ( // Renderiza o modal apenas se um prato for selecionado
+        <Modal
+          dish={selectedDish}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)} // Função para fechar o modal
+        />
+      )}
+      <DishesList dishes={restaurant.cardapio} onDishClick={openModal} />
+    </>
+  );
+};
 
 export default Perfil;

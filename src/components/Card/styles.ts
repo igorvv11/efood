@@ -2,8 +2,14 @@ import styled from "styled-components";
 import { cores } from "../../styles";
 
 type Props = {
-  variant?: "card" | "product";
+  variant?: "card" | "product" | "addCart";
 };
+
+export const Imagens = styled.img`
+  width: 100%;
+  height: 216px;
+  object-fit: cover;
+`;
 
 export const CardContainer = styled.div<Props>`
   background-color: ${(props) =>
@@ -35,26 +41,6 @@ export const TitleCard = styled.div<Props>`
   margin: ${(props) => (props.variant === "product" ? "8px 0 0 0" : "8px")};
   font-weight: bold;
   font-size: ${(props) => (props.variant === "product" ? "16px" : "18px")};
-`;
-
-export const Botao = styled.a<Props>`
-  background-color: ${(props) =>
-    props.variant === "product" ? cores.branca : cores.vermelho};
-  color: ${(props) =>
-    props.variant === "product" ? cores.vermelho : cores.branca};
-  padding: ${(props) => (props.variant === "product" ? "4px" : "4px 6px")};
-  border: none;
-  text-decoration: none;
-  cursor: pointer;
-  display: ${(props) =>
-    props.variant === "product" ? "block" : "inline-block"};
-  width: ${(props) => (props.variant === "product" ? "100%" : "auto")};
-  text-align: ${(props) => (props.variant === "product" ? "center" : "left")};
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: ${(props) => (props.variant === "product" ? "8px" : "0")};
-  margin-left: ${(props) => (props.variant === "product" ? "0" : "8px")};
-  margin-bottom: ${(props) => (props.variant === "product" ? "0" : "8px")};
 `;
 
 export const Infos = styled.div`

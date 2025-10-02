@@ -18,7 +18,7 @@ const Header = ({ variant = "home" }: HeaderProps) => {
     return (
       <HeroHeader style={{ background: `url(${Vector}) ` }}>
         <HeaderPerfil className="container">
-          <Nav href="#">Restaurantes</Nav>
+          <Nav href="/">Restaurantes</Nav>
           <StyledLink to="/">
             <img src={Logo} alt="Company logo" />
           </StyledLink>

@@ -9,13 +9,19 @@ import {
   Wrapper,
 } from "./styles";
 
-const HeroPage = () => (
+type Props = {
+  image: string;
+  category: string;
+  title: string;
+};
+
+const HeroPage = ({ image, category, title }: Props) => (
   <HeroPageContainer>
-    <HeroBackground style={{ backgroundImage: `url(${Macarao})` }} />
+    <HeroBackground style={{ backgroundImage: `url(${image})` }} />
     <Wrapper>
       <Content>
-        <Info>Italiana</Info>
-        <Title>La Dolce Vita Trattoria</Title>
+        <Info>{category}</Info>
+        <Title>{title}</Title>
       </Content>
     </Wrapper>
   </HeroPageContainer>

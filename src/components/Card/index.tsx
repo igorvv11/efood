@@ -2,16 +2,16 @@ import Estrela from "../../assets/images/estrela.png";
 
 import {
   Border,
-  Botao,
   CardContainer,
   Description,
+  Imagens,
   Infos,
   TitleCard,
   TitleDescription,
 } from "./styles";
 import Tag from "../Tag";
 import { Link } from "react-router-dom";
-
+import Button from "../Button";
 type Props = {
   variant?: "card" | "product";
   title: string;
@@ -19,19 +19,23 @@ type Props = {
   image: string;
   description: string;
   avaliation?: number;
+  id?: number;
+  onClick?: () => void;
 };
 
 const Card = ({
+  id,
   title,
   infos = [],
   image,
   description,
   avaliation,
   variant = "card",
+  onClick,
 }: Props) => {
-  const getDescricao = (text: string) => {
-    if (text.length > 250) {
-      return text.slice(0, 247) + "...";
+  const getDescricao = (text: string | undefined) => {
+    if (text && text.length > 129) {
+      return text.slice(0, 126) + "...";
     }
     return text;
   };
@@ -42,9 +46,9 @@ const Card = ({
         <img src={image} alt={title} />
         <TitleCard variant="product">{title}</TitleCard>
         <Description variant="product">{getDescricao(description)}</Description>
-        <Botao as="button" variant="product">
+        <Button onClick={onClick} to="#" type="button" variant="product">
           Adicionar ao carrinho
-        </Botao>
+        </Button>
       </CardContainer>
     );
   }
@@ -52,7 +56,7 @@ const Card = ({
   return (
     <CardContainer variant="card">
       <Border>
-        <img src={image} alt={title} />
+        <Imagens src={image} alt={title} />
         <Infos>
           {infos.map((info) => (
             <Tag key={info}>{info}</Tag>
@@ -69,8 +73,10 @@ const Card = ({
           </TitleDescription>
         </TitleCard>
         <Description variant="card">{getDescricao(description)}</Description>
-        <Link to="/Perfil">
-          <Botao variant="card">Saiba mais</Botao>
+        <Link to={`/Perfil/${id}`}>
+          <Button to={`/Perfil/${id}`} type="link" variant="card">
+            Saiba mais
+          </Button>
         </Link>
       </Border>
     </CardContainer>
