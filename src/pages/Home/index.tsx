@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 import RestaurantList from "../../components/RestaurantList";
 
-import { useEffect, useState } from "react";
+import { useGetRestaurantsQuery } from "../../services/api";
 
 export type Restaurant = {
   id: number;
@@ -22,18 +22,13 @@ export type Restaurant = {
 };
 
 const Home = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const { data: restaurants, isLoading } = useGetRestaurantsQuery();
 
-  useEffect(() => {
-    fetch("https://ebac-fake-api.vercel.app/api/efood/restaurantes")
-      .then((response) => response.json())
-      .then((data) => setRestaurants(data));
-  }, []);
-
+  if (isLoading) return <h4>Carregando...</h4>;
   return (
     <>
       <Header variant="home" />
-      <RestaurantList restaurants={restaurants} />
+      {restaurants && <RestaurantList restaurants={restaurants} />}
     </>
   );
 };

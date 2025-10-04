@@ -8,12 +8,21 @@ import {
 } from "./styles";
 import Vector from "../../assets/images/Vector.png";
 import Logo from "../../assets/images/logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { RootReducer } from "../../store";
+import { open } from "../../store/reducers/cart";
 
 export type HeaderProps = {
   variant?: "home" | "perfil";
 };
 
 const Header = ({ variant = "home" }: HeaderProps) => {
+  const { items } = useSelector((state: RootReducer) => state.cartSlice);
+  const dispatch = useDispatch();
+  const openCart = () => {
+    dispatch(open());
+  };
+
   if (variant === "perfil") {
     return (
       <HeroHeader style={{ background: `url(${Vector}) ` }}>
@@ -22,7 +31,9 @@ const Header = ({ variant = "home" }: HeaderProps) => {
           <StyledLink to="/">
             <img src={Logo} alt="Company logo" />
           </StyledLink>
-          <Nav href="#">0 produto(s) no carrinho</Nav>
+          <Nav href="#" onClick={openCart}>
+            {items.length} produto(s) no carrinho
+          </Nav>
         </HeaderPerfil>
       </HeroHeader>
     );

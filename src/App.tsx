@@ -4,14 +4,20 @@ import { GlobalCss } from "./styles";
 
 import Footer from "./components/Footer";
 import Rotas from "./routes";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import Cart from "./components/Cart";
 
 function App() {
   return (
-    <BrowserRouter>
-      <GlobalCss />
-      <Rotas />
-      <Footer />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <GlobalCss />
+        <Rotas />
+        <Cart />
+        <Footer />
+      </BrowserRouter>
+    </Provider>
   );
 }
 

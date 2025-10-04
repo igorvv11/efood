@@ -3,6 +3,10 @@ import close from "../../assets/images/close.png";
 import { ModalContain, ModalContainer, ModalContent } from "./styles";
 import Button from "../Button";
 
+import { useDispatch } from "react-redux";
+
+import { add, open } from "../../store/reducers/cart";
+
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -17,6 +21,12 @@ export const FormattedPrice = (price: number) => {
 };
 
 const Modal = ({ isOpen, onClose, dish }: Props) => {
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    dispatch(add(dish));
+    dispatch(open());
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -35,8 +45,7 @@ const Modal = ({ isOpen, onClose, dish }: Props) => {
               type="button"
               variant="addCart"
               onClick={() => {
-                console.log("Adicionou ao carrinho");
-                onClose();
+                handleAddToCart();
               }}
               to="#"
             >

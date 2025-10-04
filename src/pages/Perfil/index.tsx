@@ -1,10 +1,11 @@
 import Header from "../../components/Header";
 import HeroPage from "../../components/HeroPage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import DishesList from "../../components/DishesList";
-import { Restaurant } from "../Home";
 import Modal from "../../components/Modal";
+
+import { useGetDishQuery } from "../../services/api";
 
 export type Dish = {
   id: number;
@@ -19,18 +20,11 @@ export type GalleryItem = Dish;
 
 const Perfil = () => {
   const { id } = useParams();
-
-  const [restaurant, setRestaurant] = useState<Restaurant>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
+  const { data: restaurant, isLoading } = useGetDishQuery(id);
 
-  useEffect(() => {
-    fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes/${id}`)
-      .then((response) => response.json())
-      .then((data) => setRestaurant(data));
-  }, [id]);
-
-  if (!restaurant) {
+  if (isLoading || !restaurant) {
     return <h3>Carregando...</h3>;
   }
 
