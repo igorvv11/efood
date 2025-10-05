@@ -17,7 +17,6 @@ export const CardContainer = styled.div<Props>`
   color: ${(props) => (props.variant === "product" ? cores.branca : "inherit")};
   padding: ${(props) => (props.variant === "product" ? "8px" : "0")};
   position: relative;
-  width: ${(props) => (props.variant === "product" ? "320px" : "472px")};
 
   > img {
     width: 100%;

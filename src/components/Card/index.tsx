@@ -54,7 +54,7 @@ const Card = ({
   }
 
   return (
-    <CardContainer variant="card">
+    <CardContainer variant="card" className="container">
       <Border>
         <Imagens src={image} alt={title} />
         <Infos>
