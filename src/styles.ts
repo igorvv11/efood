@@ -1,9 +1,16 @@
+import { tab } from "@testing-library/user-event/dist/tab";
 import styled, { createGlobalStyle } from "styled-components";
 
 export const cores = {
   branca: "#FFF8F2",
   vermelho: "#E66767",
   laranja: "#FFEBD9",
+};
+
+export const breakpoints = {
+  desktop: "1024px",
+  tablet: "768px",
+  mobile: "540px",
 };
 
 export const GlobalCss = createGlobalStyle`
@@ -23,6 +30,10 @@ body{
     max-width: 1024px;
   width: 100%;
   margin: 0 auto;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    max-width: 80%;
+  }
 }
 
 `;

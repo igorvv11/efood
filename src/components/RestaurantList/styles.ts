@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoints } from "../../styles";
 
 export const List = styled.ul`
   display: grid;
@@ -9,5 +10,10 @@ export const List = styled.ul`
 
   li {
     list-style: none;
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    grid-template-columns: 1fr;
+    justify-items: center;
   }
 `;

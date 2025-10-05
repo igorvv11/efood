@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { cores } from "../../styles";
+import { breakpoints, cores } from "../../styles";
+import { ButtonContainer } from "../Button/styles";
+
+const flexColumn = `
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const ModalContainer = styled.div`
   position: fixed;
   top: 0;
@@ -29,13 +36,29 @@ export const ModalContent = styled.div`
   padding: 32px;
   display: flex;
 
+  @media (max-width: ${breakpoints.tablet}) {
+    ${flexColumn}
+  }
+
   > img {
     object-fit: cover;
     width: 280px;
     height: 280px;
     margin-right: 24px;
-  }
 
+    @media (max-width: ${breakpoints.tablet}) {
+      margin-right: 0;
+      margin-bottom: 24px;
+      width: 280px;
+      height: 140px;
+    }
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    ${ButtonContainer} {
+      max-width: 377px;
+      width: 100%;
+    }
+  }
   h3 {
     font-size: 18px;
     font-weight: 900;
@@ -46,6 +69,11 @@ export const ModalContent = styled.div`
     font-size: 14px;
     line-height: 22px;
     margin-bottom: 16px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      ${flexColumn}
+      text-align: justify;
+    }
   }
 
   .close-icon {
