@@ -3,7 +3,7 @@ import { ButtonContainer } from "./styles";
 import { Link } from "react-router-dom";
 
 type Props = {
-  type: "button" | "link";
+  type: "button" | "link" | "submit";
   variant?: "card" | "product" | "addCart" | "perfil";
   children: ReactNode;
   to?: string;
@@ -26,7 +26,7 @@ const Button = ({
   }
 
   return (
-    <ButtonContainer type="button" variant={variant} onClick={onClick}>
+    <ButtonContainer type={type} variant={variant} onClick={onClick}>
       {children}
     </ButtonContainer>
   );

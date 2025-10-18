@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { cores } from "../../styles";
+import { breakpoints, cores } from "../../styles";
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -30,6 +30,10 @@ export const HeaderPerfil = styled.div`
   grid-template-columns: 1fr auto 1fr;
   padding: 64px 0;
   align-items: center;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    gap: 16px;
+  }
 
   img {
     justify-self: center;

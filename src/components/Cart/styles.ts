@@ -99,3 +99,24 @@ export const Prices = styled.div`
   margin-top: 40px;
   margin-bottom: 16px;
 `;
+
+export const CheckoutContainer = styled.div`
+  color: ${cores.laranja};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 32px;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  p {
+    line-height: 22px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+`;
