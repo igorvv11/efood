@@ -1,4 +1,3 @@
-import { tab } from "@testing-library/user-event/dist/tab";
 import styled, { createGlobalStyle } from "styled-components";
 
 export const cores = {

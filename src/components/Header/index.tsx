@@ -1,4 +1,5 @@
 import {
+  CartButtonMobile,
   HeaderHome,
   HeaderPerfil,
   HeroHeader,
@@ -17,7 +18,9 @@ export type HeaderProps = {
 };
 
 const Header = ({ variant = "home" }: HeaderProps) => {
-  const { items } = useSelector((state: RootReducer) => state.cartSlice);
+  const { items, isOpen } = useSelector(
+    (state: RootReducer) => state.cartSlice
+  );
   const dispatch = useDispatch();
   const openCart = () => {
     dispatch(open());
@@ -25,17 +28,24 @@ const Header = ({ variant = "home" }: HeaderProps) => {
 
   if (variant === "perfil") {
     return (
-      <HeroHeader style={{ background: `url(${Vector}) ` }}>
-        <HeaderPerfil className="container">
-          <Nav href="/">Restaurantes</Nav>
-          <StyledLink to="/">
-            <img src={Logo} alt="Company logo" />
-          </StyledLink>
-          <Nav href="#" onClick={openCart}>
-            {items.length} produto(s) no carrinho
-          </Nav>
-        </HeaderPerfil>
-      </HeroHeader>
+      <>
+        <HeroHeader style={{ background: `url(${Vector}) ` }}>
+          <HeaderPerfil className="container">
+            <Nav href="/">Restaurantes</Nav>
+            <StyledLink to="/">
+              <img src={Logo} alt="Company logo" />
+            </StyledLink>
+            <Nav href="#" onClick={openCart}>
+              {items.length} produto(s) no carrinho
+            </Nav>
+          </HeaderPerfil>
+        </HeroHeader>
+        {!isOpen && items.length > 0 && (
+          <CartButtonMobile onClick={openCart}>
+            <span>{items.length}</span>
+          </CartButtonMobile>
+        )}
+      </>
     );
   }
 

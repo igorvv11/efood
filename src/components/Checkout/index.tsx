@@ -7,6 +7,7 @@ import { Container, Form, InputGroup, InputWrapper } from "./styles";
 import Button from "../Button";
 import { usePurchaseMutation } from "../../services/api";
 import { Dish } from "../../pages/Perfil";
+import { FormattedPrice } from "../Modal";
 
 type Props = {
   onBackToCart: () => void;
@@ -25,7 +26,6 @@ const Checkout = ({
 }: Props) => {
   const [step, setStep] = useState<"delivery" | "payment">("delivery");
   const validationSchema = Yup.object().shape({
-    // Delivery fields
     receiver: Yup.string().when("step", {
       is: "delivery",
       then: (schema) =>
@@ -99,7 +99,7 @@ const Checkout = ({
       cardCode: "",
       expiresMonth: "",
       expireYear: "",
-      step: "delivery", // Campo auxiliar para o Yup
+      step: "delivery",
     },
     validationSchema,
     onSubmit: (values) => {
@@ -147,7 +147,6 @@ const Checkout = ({
   };
 
   const goToPayment = () => {
-    // Valida apenas os campos de entrega antes de avançar
     form.setFieldValue("step", "delivery");
     form.validateForm().then((errors) => {
       const deliveryErrors =
@@ -161,7 +160,6 @@ const Checkout = ({
         setStep("payment");
         form.setFieldValue("step", "payment");
       } else {
-        // Marca os campos como "tocados" para exibir os erros
         form.setFieldTouched("receiver", true);
         form.setFieldTouched("address", true);
         form.setFieldTouched("city", true);
@@ -264,7 +262,9 @@ const Checkout = ({
           </>
         ) : (
           <>
-            <h3>Pagamento - Valor a pagar: R$ {items[0].preco}</h3>
+            <h3>
+              Pagamento - Valor a pagar: R$ {FormattedPrice(items[0].preco)}
+            </h3>
             <InputWrapper>
               <label htmlFor="cardName">Nome no cartão</label>
               <input
@@ -297,12 +297,15 @@ const Checkout = ({
               </InputWrapper>
               <InputWrapper>
                 <label htmlFor="cardCode">CVV</label>
-                <input
+                <IMaskInput
+                  mask="000"
                   type="text"
                   id="cardCode"
                   name="cardCode"
                   value={form.values.cardCode}
-                  onChange={form.handleChange}
+                  onAccept={(value: any) =>
+                    form.setFieldValue("cardCode", value)
+                  }
                   onBlur={form.handleBlur}
                 />
                 <small>

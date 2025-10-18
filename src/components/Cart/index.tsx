@@ -21,7 +21,7 @@ import { usePurchaseMutation } from "../../services/api";
 
 const Cart = () => {
   const [view, setView] = useState<"cart" | "checkout" | "success">("cart");
-  const [purchase, { data, isSuccess }] = usePurchaseMutation();
+  const [purchase, { data }] = usePurchaseMutation();
 
   const { items, isOpen } = useSelector(
     (state: RootReducer) => state.cartSlice
@@ -30,7 +30,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const closeCart = () => {
     dispatch(close());
-    setView("cart"); // Sempre reseta para a visão do carrinho ao fechar
+    setView("cart");
   };
 
   const removeItem = (item: Dish) => {

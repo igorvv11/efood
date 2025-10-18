@@ -1,5 +1,3 @@
-// HeroPage.tsx
-import Macarao from "../../assets/images/macarrao_hero.png";
 import {
   HeroBackground,
   HeroPageContainer,
