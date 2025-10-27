@@ -46,7 +46,8 @@ const Checkout = ({
     }),
     zipCode: Yup.string().when("step", {
       is: "delivery",
-      then: (schema) => schema.required("O campo é obrigatório"),
+      then: (schema) =>
+        schema.min(9, "CEP inválido").required("O campo é obrigatório"),
       otherwise: (schema) => schema,
     }),
     number: Yup.string().when("step", {
@@ -66,22 +67,32 @@ const Checkout = ({
     }),
     cardNumber: Yup.string().when("step", {
       is: "payment",
-      then: (schema) => schema.required("O campo é obrigatório"),
+      then: (schema) =>
+        schema
+          .min(19, "Número do cartão inválido")
+          .required("O campo é obrigatório"),
       otherwise: (schema) => schema,
     }),
     cardCode: Yup.string().when("step", {
       is: "payment",
-      then: (schema) => schema.required("O campo é obrigatório"),
+      then: (schema) =>
+        schema.min(3, "CVV inválido").required("O campo é obrigatório"),
       otherwise: (schema) => schema,
     }),
     expiresMonth: Yup.string().when("step", {
       is: "payment",
-      then: (schema) => schema.required("O campo é obrigatório"),
+      then: (schema) =>
+        schema
+          .min(2, "Mês de vencimento inválido")
+          .required("O campo é obrigatório"),
       otherwise: (schema) => schema,
     }),
     expireYear: Yup.string().when("step", {
       is: "payment",
-      then: (schema) => schema.required("O campo é obrigatório"),
+      then: (schema) =>
+        schema
+          .min(2, "Ano de vencimento inválido")
+          .required("O campo é obrigatório"),
       otherwise: (schema) => schema,
     }),
   });
